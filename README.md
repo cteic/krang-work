@@ -133,8 +133,9 @@ This is not a Discourse Graphs implementation. It borrows one idea from that pro
 - Ten processes racing for five issues. Each issue is claimed exactly once.
 - The MCP server as a child process over stdio, and one real MCP client against it.
 - The web page escapes everything it shows. Its Markdown renderer is checked against a list of the only tags it may write.
+- One proposal taken through the Discourse Graphs plugin by hand, in that project's example vault on plugin 1.8.0. The plugin offered to create a claim, the click made a claim node, and the proposal's line became a link to it. This is a manual check, not an automated one.
 
-Not tested: Windows, any remote transport, and the Discourse Graphs plugin acting on a proposal. I have read that plugin's source and checked its files in a live vault, but I have not yet clicked through the conversion.
+Not tested: Windows and any remote transport.
 
 ## Limits
 
