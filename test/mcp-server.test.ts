@@ -188,6 +188,22 @@ test("issue_list returns summaries, not descriptions, and project_list counts op
   assert.ok(projects.text.includes('"open_issues": 1'));
 });
 
+test("issue_list ignores a filter left empty, and names the statuses when one is wrong", () => {
+  const store = freshStore();
+  call(store, "local", "issue_create", NORMAL);
+  const filled = call(store, "local", "issue_list", {
+    status: "",
+    project: "",
+    label: " ",
+    query: "",
+  });
+  assert.equal(filled.body.get("count"), 1);
+
+  const wrong = call(store, "local", "issue_list", { status: "approved" });
+  assert.equal(wrong.isError, true);
+  assert.ok(wrong.text.includes("backlog, todo, in_progress, in_review, done, cancelled"));
+});
+
 test("thought_capture writes to the inbox and does not create an issue", () => {
   const store = freshStore();
   const captured = call(store, "cloud", "thought_capture", {

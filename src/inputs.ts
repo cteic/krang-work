@@ -2,6 +2,7 @@ import { asRecord, numberField, stringArrayField, stringField } from "./json-rec
 import {
   DEFAULT_LEASE_SECONDS,
   DEFAULT_LIST_LIMIT,
+  STATUSES,
   WorkError,
   isIssueStatus,
   isPriority,
@@ -149,18 +150,28 @@ export function parseUpdateInput(value: unknown): UpdateInput {
   };
 }
 
+// A filter left empty filters nothing. Some models fill every optional field
+// with "", and read literally that would match no issue at all.
+function filter(record: Map<string, unknown>, key: string): string | null {
+  const value = optional(record, key);
+  return value === null || value.trim() === "" ? null : value;
+}
+
 export function parseListFilter(value: unknown): ListFilter {
   const record = toRecord(value);
   only(record, ["project", "status", "label", "query", "include_closed", "limit"]);
-  const status = optional(record, "status");
+  const status = filter(record, "status");
   if (status !== null && !isIssueStatus(status)) {
-    throw new WorkError("invalid_input", `unknown status "${status}"`);
+    throw new WorkError(
+      "invalid_input",
+      `unknown status "${status}"; use one of ${STATUSES.join(", ")}, or leave it out`,
+    );
   }
   return {
-    project: optional(record, "project"),
+    project: filter(record, "project"),
     status,
-    label: optional(record, "label"),
-    query: optional(record, "query"),
+    label: filter(record, "label"),
+    query: filter(record, "query"),
     // Closed issues are left out unless asked for, or a status names them.
     open_only: status === null && optionalBoolean(record, "include_closed") !== true,
     limit: optionalInteger(record, "limit") ?? DEFAULT_LIST_LIMIT,

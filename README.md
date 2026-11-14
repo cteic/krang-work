@@ -111,7 +111,7 @@ It proposes a kind for each thought (question, claim, evidence, source or idea) 
 krang-work agent "Find the approved issue, claim it, do it, submit evidence" --model <name>
 ```
 
-This hands the seven tools to a local model and nothing else: no shell, no file access. In one run a 9-billion-parameter model read a sensitive issue, claimed it, added its evidence, tried to mark the issue done and was refused. It then reported that it had submitted the work for review. It hadn't. Read the issue, not the summary.
+This hands the seven tools to a local model and nothing else: no shell, no file access. In one run a 9-billion-parameter model read a sensitive issue, claimed it, added its evidence, tried to mark the issue done and was refused. It then reported that it had submitted the work for review. It hadn't. Read the issue, not the summary. A 120-billion-parameter model on the same task claimed the issue, added its evidence and moved it to review in 66 seconds, after four refused calls.
 
 ## Obsidian and Discourse Graphs
 
@@ -129,7 +129,7 @@ This is not a Discourse Graphs implementation. It borrows one idea from that pro
 
 ## What is tested
 
-- 41 tests, run with Node's own test runner: `npm test`.
+- 42 tests, run with Node's own test runner: `npm test`.
 - Ten processes racing for five issues. Each issue is claimed exactly once.
 - The MCP server as a child process over stdio, and one real MCP client against it.
 - The web page escapes everything it shows. Its Markdown renderer is checked against a list of the only tags it may write.
