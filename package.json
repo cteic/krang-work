@@ -1,0 +1,26 @@
+{
+  "name": "krang-work",
+  "version": "0.1.0",
+  "description": "A local issue tracker in Markdown files, built for coding agents: an MCP server, thought capture, and rules that keep approval with a person.",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "krang-work": "./src/cli.ts"
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "scripts": {
+    "test": "node --experimental-strip-types --test 'test/*.test.ts'",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "demo": "./demo.sh"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "prettier": "3",
+    "typescript": "^5.9.0"
+  }
+}
