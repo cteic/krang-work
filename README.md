@@ -9,7 +9,7 @@ It is a prototype, a few days old, with one user.
 ## Try it
 
 ```bash
-git clone <this repo> && cd krang-work
+git clone https://github.com/pete-watters/krang-work.git && cd krang-work
 ./demo.sh
 ```
 
