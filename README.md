@@ -9,9 +9,11 @@ It is a prototype, a few days old, with one user.
 ## Try it
 
 ```bash
-git clone https://github.com/pete-watters/krang-work.git && cd krang-work
+git clone https://github.com/cteic/krang-work.git && cd krang-work
 ./demo.sh
 ```
+
+![The demo script running in a terminal](docs/demo.gif)
 
 The demo uses a throwaway folder, no network and no model. A thought becomes an issue. An agent tries to claim it and is refused. I approve it. Two agents race and one wins. The winner submits evidence, I accept, and `git log` shows the trail.
 
